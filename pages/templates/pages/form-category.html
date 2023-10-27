@@ -1,0 +1,32 @@
+{% load honeypot %}
+
+<div id="category-form" class="popup">
+    <form class="form" action="" method="post">
+        <a href="#" class="close close-bk-form" title="Fermer la pop-up">❌</a>
+        <p>Demande de service</p>
+        <h2 class="title h2">{{ title }}</h2>
+        <hr>
+        <p class="info valid center demand-confirmation" hidden="">Votre demande a bien été envoyée, nous vous répondrons dans les meilleurs délais.</p>
+        <p class="info warning center check-something" hidden="">Il y a eu une erreur lors de l'envoi, notre e-mail a@b.c reste disponible</p>
+        {% csrf_token %}
+        {% render_honeypot_field "firstname" %}
+        <p>{{ form_category.name }}</p>
+        {% if page_class == "service category professionnel" %}
+        <p>{{ form_category.company }}</p>
+        {% else %}
+        <p>
+            <input hidden type="text" name="company" placeholder="Votre entreprise*" maxlength="20" required="" id="id_company" value="N/A">
+        </p>
+        {% endif %}
+        <p>{{ form_category.location }}</p>
+        <p>{{ form_category.email }}</p>
+        <p>{{ form_category.phone }}</p>
+        <p>{{ form_category.all }}</p>
+        <details class="faq-qr">
+            <summary class="link question">Préciser les services qui m'intéressent ?</summary>
+            <p>{{ form_category.extra_services.label }}</p>
+            {{ form_category.extra_services }}
+        </details>
+        <input class="btn btn-lblue" type="submit" value="Je fais une demande de service" />
+    </form>
+</div>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<div id="footer-logo" class="box grid-label" style="--grid-label:logo">
+    <h3>
+        <img src="{% static 'img/LogoAbeillesBlanc.svg' %}" alt="abeilles logo" class="logo">
+    </h3>
+</div>
+<nav id="footer-nav" class="box nav grid-label" style="--grid-label:menu" aria-label="Menu de bas de page">
+    <h4 class="title h4">A voir aussi</h4>
+    <ol class="grid list" style="--grid-template:1fr / 1fr 1fr;--grid-gap:.25em;">
+        <li class="link-box"><a href="/" class="link footer">Accueil</a></li>
+        <li class="link-box"><a href="{% url 'garden' %}" class="link footer">Le jardin</a></li>
+        <li class="link-box"><a href="{% url 'association' %}" class="link footer">Qui&nbsp;sommes-nous&#8239;?</a></li>
+        <li class="link-box"><a href="{% url 'jobhunt' %}" class="link footer">Recherche&nbsp;d’emploi</a></li>
+        <li class="link-box"><a href="{% url 'services_ind' %}" class="link footer">Particuliers</a></li>
+        <li class="link-box m-only-big" hidden><a href="{% url 'contact' %}" class="link footer">Contact</a></li>
+        <li class="link-box"><a href="{% url 'services_pro' %}" class="link footer">Professionnels</a></li>
+        <li class="link-box m-only-tiny" hidden><a href="{% url 'contact' %}" class="link footer">Contact</a></li>
+    </ol>
+</nav>
+<div id="footer-legal" class="box grid-label" style="--grid-label:legal">
+    <h4 class="title h4">Informations légales</h4>
+    <ol class="grid list" style="--grid-template:1fr;--grid-gap:.25em;">
+        <li class="link-box"><a href="{% url 'legal-notice' %}#utilisation-des-cookies" class="link footer">Cookies</a></li>
+        <li class="link-box"><a href="{% url 'legal-notice' %}#politique-de-confidentialit-" class="link footer">Confidentialité</a></li>
+        <li class="link-box"><a href="{% url 'legal-notice' %}" class="link footer">Mentions-légales</a></li>
+    </ol>
+</div>
+<div id="footer-social" class="box grid-label" style="--grid-label:social">
+    <h4 class="title h4">Suivez-nous</h4>
+    <div class="box grid center" style="--grid-template:auto / 1fr 1fr 1fr 1fr 1fr;--grid-gap:.1em;">
+        <a href="#" class="link nl call-nl-form" title="Newsletter" aria-label="Newsletter" alt="Newsletter"><i class="fas fa-envelope-open-text call-nl-form"></i></a>
+        {% if social_facebook and social_facebook != "#" %}<a href="{{ social_facebook }}" class="link fb" title="Facebook" aria-label="Facebook" alt="Facebook"><i class="fab fa-facebook-square"></i></a>{% endif %}
+        {% if social_instagram and social_instagram != "#" %}<a href="{{ social_instagram }}" class="link insta" title="Instagram" aria-label="Instagram" alt="Instagram"><i class="fab fa-instagram-square"></i></a>{% endif %}
+        {% if social_linkedin and social_linkedin != "#" %}<a href="{{ social_linkedin }}" class="link ld" title="LinkedIn" aria-label="LinkedIn" alt="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+        {% if social_twitter and social_twitter != "#" %}<a href="{{ social_twitter }}" class="link tw" title="Twitter" aria-label="Twitter" alt="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+    </div>
+</div>
+<div id="footer-copyright" class="box grid-label center" style="--grid-label:copyright">
+    <span class="copyright">© 2021 Abeilles Aide & Entraide. Voir les <a href="{% url 'legal-notice' %}" rel="nofollow">mentions légales</a> pour prendre connaissances des licences applicables.</span>
+</div>

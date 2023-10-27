@@ -1,0 +1,61 @@
+{% load honeypot %}
+
+{% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+{% endif %}
+
+    <p class="info valid center demand-confirmation" hidden="">Votre message a bien était envoyé, nous vous répondrons dans les meilleurs délais</p>
+    <p class="info warning center check-something" hidden="">Une erreur c'est produite lors de l'envoi, notre e-mail <a href="mailto:contact@asso-abeilles.fr">contact @ asso-abeilles.fr</a> reste disponible</p>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        {% render_honeypot_field "firstname" %}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        <input type="radio" name="type" value="1" required="" id="id_type_0" checked="checked" hidden>
+        <input type="radio" name="type" value="2" required="" id="id_type_1" hidden>
+        <div id="contact-form-type">
+            <label for={{ form.type.id_for_label }}>Vous êtes :</label>
+            <ul id="id-type">
+                <li>
+                    <label id="id_type_0_label" class="radio radio-button" for="id_type_0">Un particulier</label>
+                </li>
+                <li>
+                    <label id="id_type_1_label" class="radio radio-button" for="id_type_1">Un professionnel</label>
+                </li>
+            </ul>
+        </div>
+        <p id="contact-form-subind" class="left">
+            <label for={{ form.subject_ind.id_for_label }}>Sujet :</label>
+            {{ form.subject_ind }}
+        </p>
+        <p id="contact-form-subpro">
+            {{ form.subject_pro }}
+        </p>
+        <p id="contact-form-name">
+            {{ form.name }}
+        </p>
+        <p id="contact-form-email">
+            {{ form.email }}
+        </p>
+        <p id="contact-form-phone">
+            {{ form.phone }}
+        </p>
+        <p id="contact-form-msg">
+            {{ form.message }}
+        </p>
+        <p id="contact-form-copy" class="left">
+            <label for={{ form.copy.id_for_label }}>Recevoir une copie</label>
+            {{ form.copy }}
+        </p>
+        <input class="btn btn-lblue" type="submit" value="Envoyer" />
+    </form>

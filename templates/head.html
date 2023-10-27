@@ -1,0 +1,42 @@
+{% load static %}
+
+<meta charset="UTF-8">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:type" content="website">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=yes, viewport-fit=cover">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+
+<meta name="description" content="{{ meta_description }}" />
+<meta property="og:description" content="{{ meta_description }}">
+
+<title>{% firstof meta_title page.title 'Abeilles Aide et Entraide' %}</title>
+<meta property="og:title" content="{% firstof post.title meta_title page.title 'Abeilles Aide et Entraide' %}">
+{% comment %} <meta property="og:type" content="" /> {% endcomment %}
+{% comment %} <meta property="og:url" content="" /> {% endcomment %}
+
+{% if post.image %}
+<meta property="og:image" content="{{ post.image.url }}" />
+{% elif featured_image %}
+<meta property="og:image" content="{{ featured_image.url }}" />
+{% elif image1 %}
+<meta property="og:image" content="{{ image1.url }}" />
+{% elif image2 %}
+<meta property="og:image" content="{{ image2.url }}" />
+{% elif image3%}
+<meta property="og:image" content="{{ image3.url }}" />
+{% endif %}
+
+{% if post.extract or headline %}
+<meta property="og:description" content="{% firstof post.extract headline %}" />
+{% endif %}
+
+{% comment %} <link rel="canonical" href="{{ config.site_dns }}"> {% endcomment %}
+<link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" sizes="32x32">
+
+<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'css/var.css' %}">
+<link rel="stylesheet" href="{% static 'css/animation.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/fawesome.css' %}">
+<link rel="stylesheet" href="{% static 'css/fcreadisplay.css' %}">

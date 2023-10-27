@@ -1,0 +1,81 @@
+{% load static %}
+
+<nav id="smart-nav" hidden>
+    <input type="checkbox" name="smart-nav-status" id="smart-nav-status" hidden>
+    <label for="smart-nav-status" id="smart-nav-button" title="Ouvrir le menu" class="link">
+        <span class="button-view"></span>
+    </label>
+    <div id="smart-nav-content">
+        <div id="smart-nav-content-items">
+            <img src="{% static 'img/LogoAbeilles.svg' %}" alt="Logo abeilles" id="smart-nav-logo">
+            <a class="smart-nav-item link{% if "home" in page_class %} active{% endif %}" href="/"><i class="fas fa-home"></i>&emsp;Accueil</a>
+
+            <details class="smart-nav-item" {% if "association" in page_class %}open{% endif %}>
+                <summary class="link{% if "association" in page_class %} active{% endif %}">&emsp;Qui&nbsp;sommes-nous&#8239;?</summary>
+                <ol class="link-sub">
+                    <li class="sub item"><a href="{% url 'association' %}" class="link">Présentation</a></li>
+                    <li class="sub item"><a href="{% url 'missions' %}" class="link">Missions,&nbsp;valeurs,&nbsp;engagement</a></li>
+                    <li class="sub item"><a href="{% url 'territorial-influence' %}" class="link">Rayonnement&nbsp;territorial</a></li>
+                    <li class="sub item"><a href="{% url 'blog' %}" class="link">Actualités</a></li>
+                </ol>
+            </details>
+
+            <details class="smart-nav-item" {% if "services-ind" in page_class %}open{% endif %}>
+                <summary class="link{% if "services-ind" in page_class %} active{% endif %}">&emsp;Particuliers</summary>
+                <ol class="link-sub">
+                    <li class="sub item"><a href="{% url 'services_ind' %}" class="link">Nos services</a></li>
+                    {% for category in menu_categories_ind %}
+                    <li class="sub item">
+                        <a href="{% url 'category' category.slug %}" class="link">{{ category }}</a>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </details>
+
+            <details class="smart-nav-item" {% if "services-pr" in page_class %}open{% endif %}>
+                <summary class="link{% if "services-pr" in page_class %} active{% endif %}">&emsp;Professionnels</summary>
+                <ol class="link-sub">
+                    <li class="sub item"><a href="{% url 'services_pro' %}" class="link">Nos services</a></li>
+                    {% for category in menu_categories_pro %}
+                    <li class="sub item">
+                        <a href="{% url 'category' category.slug %}" class="link">{{ category }}</a>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </details>
+
+            <a class="smart-nav-item link{% if "jobhunt" in page_class %} active{% endif %}" href="{% url 'jobhunt' %}"><i class="fas fa-search"></i>&emsp;Recherche&nbsp;d’emploi</a>
+
+            <details class="smart-nav-item" {% if "garden" in page_class %}open{% endif %}>
+                <summary class="link{% if "garden" in page_class %} active{% endif %}">&emsp;Le&nbsp;Jardin</summary>
+                <ol class="link-sub">
+                    <li class="sub item"><a href="{% url 'garden' %}" class="link">Pr&nbsp;sentation</a></li>
+                    <li class="sub item"><a href="{% url 'basket' %}" class="link">Les&nbsp;paniers</a></li>
+                    <li class="sub item"><a href="{% url 'garden-project' %}" class="link">Le&nbsp;projet</a></li>
+                </ol>
+            </details>
+
+            <a class="smart-nav-item link{% if "contact" in page_class %} active{% endif %}" href="{% url 'contact' %}"><i class="fas fa-envelope-open-text"></i>&emsp;Contact</a>
+        </div>
+        <div id="smart-nav-secondary">
+            {% if page_class == "basket" %}
+            <a href="#" class="link vdgreen mini-icon-box" title="Je m’abonne à la newsletter du jardin">
+                <i class="mini-icon jardin"></i>
+            </a>
+            {% else %}
+            <a href="{% url 'basket' %}#basketnb" class="link vdgreen mini-icon-box" title="Je m’abonne aux paniers bio">
+                <i class="mini-icon panier call-bk-form"></i>
+            </a>
+            {% endif %}
+            <a href="{% url 'contact' %}" class="link mini-icon-box call-ct-form" title="Nous contacter">
+                <i class="call-ct-form fa fa-at"></i>
+            </a>
+            <a href="#" class="link mini-icon-box call-nl-form" title="Notre newsletter">
+                <i class="call-nl-form fas fa-envelope-open-text"></i>
+            </a>
+            <a href="{{ social_facebook }}" class="link mini-icon-box" title="Notre facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    </div>
+</nav>

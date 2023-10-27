@@ -1,0 +1,416 @@
+{% load static %}
+
+{% if title %}
+<article id="introduction" class="article">
+    <div class="box-left grid-label" style="--grid-label:left">
+        <h1 class="title h1 grid-label" style="--grid-label:title">{{ title }}</h1>
+
+        {% comment %} There is an headline (h2) {% endcomment %}
+        {% if headline %}
+        {% comment %} Except page association {% endcomment %}
+        {% if page_class == "association" %}
+        <h2 style="text-align: justify;font-size: var(--f-regular);color: var(--c-dark);font-weight: unset;">{{ headline }}</h2>
+        {% else %}
+        <h2>{{ headline }}</h2>
+        {% endif %}
+        {% comment %} featured image comes here, under the H2 {% endcomment %}
+        {% if featured_image %}
+        <div class="grid-label featured" style="--grid-label:bas">
+            <img class="large" src={{ featured_image.url }} alt="Image de deco">
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <div class="headline grid-label" style="--grid-label:text">
+            <div>
+                {% comment %} Services features {% endcomment %}
+                {% if services %}
+                {% for service in services %}
+                <h2>{{ service.name }}</h2>
+                <p>{{ service.description }}</p>
+                {% endfor %}
+                {% comment %} Bodies #1 {% endcomment %}
+                {% elif body1 %}
+                {{ body1|safe }}
+                {% endif %}
+            </div>
+
+            {% if page_class == "service category professionnel" or page_class == "service category particulier" %}
+            <a href="#category-form" class="btn btn-lblue">Je fais une demande de service</a><br>
+            {% include 'pages/form-category.html' %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="box-right grid-label" style="--grid-label:right">
+        <div class="decouverte grid-label" style="--grid-label:autre">
+            {% if page_class == "garden" or page_class == "basket" or page_class == "garden-project" %}
+            <p>Découvrez Abeilles Maraîchères :</p>
+            <ul class="list">
+                <li class="item"><a href="{% url 'garden' %}" class="link blue bold">Le jardin</a></li>
+                <li class="item"><a href="{% url 'basket' %}" class="link blue bold">Les paniers</a></li>
+                <li class="item"><a href="{% url 'garden-project' %}" class="link blue bold">Le projet</a></li>
+            </ul>
+            {% elif page_class == "services-pro" or page_class == "service category professionnel" %}
+            <p>Découvrez les services proposés&nbsp;:</p>
+            <ul class="list">
+                {% for category in menu_categories_pro %}
+                <li class="item">
+                    <a href="{% url 'category' category.slug %}" class="link blue bold">{{ category }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% elif page_class == "services-ind" or page_class == "service category particulier" %}
+            <p>Découvrez les services proposés&nbsp;:</p>
+            <ul class="list">
+                {% for category in menu_categories_ind %}
+                <li class="item">
+                    <a href="{% url 'category' category.slug %}" class="link blue bold">{{ category }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% elif page_class == "jobhunt" %}
+            {% else %}
+            <p>Découvrez Abeilles Aide et Entraide :</p>
+            <ul class="list">
+                <li class="item"><a href="{% url 'missions' %}" class="link blue bold">Missions, valeurs, engagement</a></li>
+                <li class="item"><a href="{% url 'territorial-influence' %}" class="link blue bold">Rayonnement territorial</a></li>
+                <li class="item"><a href="{% url 'blog' %}" class="link blue bold">Actualités</a></li>
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="call-action grid-label" style="--grid-label:action">
+            {% if page_class == "services-pro" or page_class == "service category professionnel" or page_class == "services-ind" or page_class == "service category particulier" %}
+            <p>
+                Vous ne trouvez pas ce que vous cherchez&#8239;? <a class="link blue bold" href="{% url 'contact' %}">Contactez-nous</a> ! Nous sommes à votre écoute pour trouver des réponses à vos besoins
+            </p>
+            {% endif %}
+
+            {% if image1 %}
+            <img src={{ image1.url }} alt="Photo de decoration">
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not headline %}
+    <div class="grid-label featured" style="--grid-label:bas">
+        {% if featured_image %}
+        <img class="large" src={{ featured_image.url }} alt="Image de deco">
+        {% endif %}
+    </div>
+    {% endif %}
+</article>
+{% endif %}
+{% comment %} All up here is used when there is title var, surprised? Yeah, me too. {% endcomment %}
+
+
+{% comment %} Benefits #1 {% endcomment %}
+{% if page_class == "services-pro" or page_class == "services-ind" %}
+<article id="avantages" class="article">
+    <h2 class="title h2">Les avantages d’Abeilles Aide et Entraide</h2>
+
+    {% for benefit in benefits %}
+    <p class="avantage icon icon-auto plus"><strong>{{ benefit.title }}</strong></p>
+    {% endfor %}
+
+</article>
+{% elif page_class == "garden" %}
+<article id="avantages" class="article">
+    <h2 class="title h2">Les avantages d’Abeilles Maraîchères</h2>
+
+    {% for benefit in garden_benefits %}
+    <div class="avantage icon icon-auto plus">
+        <strong>{{ benefit.title }}</strong>
+        <br><br>
+        {{ benefit.text|safe }}
+    </div>
+    {% endfor %}
+</article>
+{% endif %}
+{% comment %} /Benefits #1 {% endcomment %}
+
+
+
+
+
+{% comment %} Testimonies {% endcomment %}
+{% if testimony_title and page_class != "jobhunt" %}
+<article id="temoignages" class="article">
+    <h2 class="title h2" style="margin-bottom: 1em">{{ testimony_title }}</h2>
+    {% if testimony1_image and testimony1_name and testimony1_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony1_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony1_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony1_text }}</blockquote>
+    </div>
+    {% endif %}
+    {% if testimony2_image and testimony2_name and testimony2_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony2_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony2_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony2_text }}</blockquote>
+    </div>
+    {% endif %}
+    {% if testimony3_image and testimony3_name and testimony3_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony3_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony3_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony3_text }}</blockquote>
+    </div>
+    {% endif %}
+</article>
+{% endif %}
+{% comment %} /Testimonies {% endcomment %}
+
+
+{% comment %} Bodies #2 {% endcomment %}
+{% if body2 %}
+<article id="infos-2" class="article">
+    <div>
+        {{ body2|safe }}
+    </div>
+    {% if image2 %}
+    <img class="large" src={{ image2.url }} alt="Image de decoration et/ou de sponso">
+    {% endif %}
+</article>
+{% endif %}
+
+{% if body3 %}
+<article id="infos-3" class="article">
+    <div>
+        {{ body3|safe }}
+    </div>
+    {% if image3 %}
+    <img class="large" src={{ image3.url }} alt="Image de decoration et/ou de sponso">
+    {% endif %}
+</article>
+{% endif %}
+{% comment %} /Bodies #2 {% endcomment %}
+
+
+{% comment %} Jobhunt features {% endcomment %}
+{% if job_body_extra %}
+<article id="job-extra" class="article">
+    <div>
+        {{ job_body_extra|safe }}
+        <div><a class="read btn btn-lblue" href="#jobhunt-form">Contactez-nous</a></div>
+    </div>
+    {% include 'pages/form-jobhunt.html' %}
+    {% if job_image_extra %}
+    <img class="large" src={{ job_image_extra.url }} alt="Image de decoration et/ou de sponso">
+    {% endif %}
+</article>
+{% endif %}
+{% comment %} /Jobhunt features {% endcomment %}
+
+
+{% comment %} Basket features #1 {% endcomment %}
+{% if basket %}
+<article id="basketnb" class="article center">
+    <h2 class="title h2">Combien reste-t-il actuellement de paniers disponibles à l’abonnement&nbsp;?{% if user.is_staff %}
+        <a href="{% url 'edit' %}" title="modifier" style="color: red;">🖍</a>
+        {% endif %}</h2>
+    <div id="basket-free" class="{{ basket.delta_class }}" style="--grid-total:{{ basket.total }}; --grid-pos-delta:{{ basket.delta }}; --grid-pos-max:{{ basket.total }}">
+        <div class="indicator">
+            <div class="cursor"></div>
+        </div>
+        <div class="number">
+            <i class="min">0</i>
+            <b class="delta">{{ basket.delta }}</b>
+            <i class="max">{{ basket.total }}</i>
+        </div>
+    </div>
+
+    {% if page_class == "basket" %}
+    <article id="basket-form" class="article" style="padding: 2rem 10% 0; margin: 2rem 0 0 0; background-color: var(--c-white);">
+        <h2 class="title h2" style="text-align: center !important;">Je souhaite m'abonner aux paniers</h2>
+        <p>Remplissez ce formulaire et nous vous contacterons rapidement</p>
+        {% include 'pages/form-basket.html' %}
+    </article>
+    {% endif %}
+
+</article>
+{% endif %}
+{% comment %} /Basket features #1 {% endcomment %}
+
+
+
+
+
+{% comment %} Basket features #2 {% endcomment %}
+{% if body_food %}
+<article id="body-food" class="article">
+    <h2 class="title h2 center">Les légumes et fruits proposés</h2>
+    {{ body_food|safe }}
+</article>
+{% endif %}
+
+{% if direct_sale %}
+<article id="info-extra" class="article">
+    {{ direct_sale|safe }}
+</article>
+{% endif %}
+{% comment %} /Basket features #2 {% endcomment %}
+
+
+{% comment %} Except Jobhunt Testimonies {% endcomment %}
+{% if testimony_title and page_class == "jobhunt" %}
+<article id="temoignages" class="article">
+    <h2 class="title h2" style="margin-bottom: 1em">{{ testimony_title }}</h2>
+    {% if testimony1_image and testimony1_name and testimony1_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony1_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony1_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony1_text }}</blockquote>
+    </div>
+    {% endif %}
+    {% if testimony2_image and testimony2_name and testimony2_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony2_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony2_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony2_text }}</blockquote>
+    </div>
+    {% endif %}
+    {% if testimony3_image and testimony3_name and testimony3_text %}
+    <div class="temoignage box">
+        <img src="{{ testimony3_image.url }}" alt="Photo de la personne qui temoigne" class="photo grid-label" style="--grid-label:photo">
+        <h3 class="title h3 name grid-label" style="--grid-label:name">{{ testimony3_name }}</h3>
+        <blockquote class="quote message grid-label" style="--grid-label:message">{{ testimony3_text }}</blockquote>
+    </div>
+    {% endif %}
+</article>
+{% endif %}
+{% comment %} /Except Jobhunt Testimonies {% endcomment %}
+
+
+{% comment %} Questions feature {% endcomment %}
+{% if questions and "category" not in page_class %}
+<article id="faq" class="article">
+    <h2 class="title h2">Vos questions</h2>
+    {% for q in questions %}
+    <details class="faq-qr">
+        <summary class="link question">{{ q.question }}</summary>
+        <p class="response">{{ q.response }}</p>
+    </details>
+    {% endfor %}
+</article>
+{% endif %}
+{% comment %} Questions feature {% endcomment %}
+
+
+{% comment %} Questions feature {% endcomment %}
+{% if questions and "category" in page_class %}
+<article id="faq" class="article">
+    <h2 class="title h2">Vos questions</h2>
+    {% for q in questions %}
+    <details class="faq-qr">
+        <summary class="link question">{{ q.question }}</summary>
+        <p class="response">{{ q.response }}</p>
+    </details>
+    {% endfor %}
+</article>
+{% endif %}
+{% comment %} Questions feature {% endcomment %}
+
+
+{% comment %} Garden map {% endcomment %}
+{% if page_class == "garden" or page_class == "basket" or page_class == "garden-project" %}
+<article id="zone" class="article center">
+    <h2 class="title h2">Accès au jardin Abeilles Maraîchères<br></h2>
+    <img src="{% static 'img/map/Plan_acces_jardin.png' %}" alt="">
+    <p class="desc center"><br><br><strong>Contact : 09 67 21 18 40</strong><br><strong>6 avenue de la Plaine Haute, à Crosne</strong><br>(entrée à côté du 5 rue des Bâtisseurs)</p>
+    <a class="read btn btn-lblue" href="/jardin#garden-form">Contactez le jardin</a>
+    {% include 'pages/form-garden.html' %}
+</article>
+{% elif page_class != "contact" and page_class != "blog" and not full_text_page %}
+<article id="zone" class="article">
+    <h2 class="title h2">Notre zone d’intervention</h2>
+    <p class="desc center">Pour faire appel à nous, le travail doit être effectué sur l’une des communes ci-dessous.</p>
+    <img src="{% static 'img/map/Zone_dintervention.png' %}" alt="">
+</article>
+{% endif %}
+
+{% if page_class == "contact" %}
+<article id="contact-form" class="article">
+    <h2 class="title h2">Nous contacter</h2>
+    {% include 'pages/form-contact.html' %}
+</article>
+{% endif %}
+{% comment %} /Garden map {% endcomment %}
+
+
+{% comment %} Benefits #2 {% endcomment %}
+{% if page_class == "service category professionnel" or page_class == "service category particulier" %}
+<article id="avantages" class="article">
+    <h2 class="title h2">Les avantages d’Abeilles Aide et Entraide</h2>
+
+    {% for benefit in benefits %}
+    <p class="avantage icon icon-auto plus"><strong>{{ benefit.title }}</strong></p>
+    {% endfor %}
+
+</article>
+{% elif page_class == "garden" %}
+<article id="avantages" class="article">
+    <h2 class="title h2">Les avantages d’Abeilles Maraîchères</h2>
+
+    {% for benefit in garden_benefits %}
+    <div class="avantage icon icon-auto plus">
+        <strong>{{ benefit.title }}</strong>
+        <br><br>
+        {{ benefit.text|safe }}
+    </div>
+    {% endfor %}
+</article>
+{% endif %}
+{% comment %} /Benefits #2 {% endcomment %}
+
+
+{% comment %} Newsletter form {% endcomment %}
+{% if newsletter_form.as_p and page_class == "garden" %}
+<article id="paniernews" class="article">
+    <h2 class="title h2">Abonnement à la newsletter des paniers</h2>
+    {% include 'pages/form-newsletter.html' %}
+</article>
+{% endif %}
+{% comment %} /Newsletter form {% endcomment %}
+
+
+{% comment %} Blog {% endcomment %}
+{% if page_class == "blog" %}
+<article id="blog-view" class="article">
+    <h1 class="title h1 center">Actualités</h1>
+
+    <div id="blog-list" class="grid">
+        {% for post in posts %}
+        <div class="blog-item">
+            {% if post.image %}
+            <img class="blog-item-thumbnail" src="{{ post.image.url }}" alt="" />
+            {% endif %}
+            <h2 class="h2 blog-item-title">{{ post.title }}</h2>
+            <p class="blog-item-preview">{{ post.extract }}</p>
+            <a class="btn btn-lblue blog-item-read" href="{% url 'single-post' post.slug %}">Lire la suite</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="blog-pages" class="center">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="previous page-number" title="Précédent">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        {% endif %}
+
+        <span class="current page-number">
+            Page <strong>{{ page_obj.number }}</strong> sur {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="previous page-number" title="Suivant">
+            <i class="fa fa-angle-right"></i>
+        </a>
+        {% endif %}
+    </div>
+</article>
+{% endif %}
+{% comment %} /Blog {% endcomment %}

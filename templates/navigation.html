@@ -1,0 +1,101 @@
+<nav id="page-nav" class="nav-bar box">
+    <ol class="list-box">
+        <li class="link-box">
+            {% if "home" in page_class %}
+            <a class="link home active" href="{% url 'homepage' %}" aria-label="Aller vers accueil" alt="Aller vers accueil"><i class="fas fa-home"></i></a>
+            {% else %}
+            <a class="link home" href="{% url 'homepage' %}" aria-label="Aller vers accueil" alt="Aller vers accueil"><i class="fas fa-home"></i></a>
+            {% endif %}
+        </li>
+
+        <li class="link-box with-sub">
+            {% if "association" in page_class %}
+            <a class="link active" href="{% url 'association' %}">Qui&nbsp;sommes-nous&#8239;?</a>
+            {% else %}
+            <a class="link" href="{% url 'association' %}">Qui&nbsp;sommes-nous&#8239;?</a>
+            {% endif %}
+            <ol class="link-sub">
+                <li class="sub item"><a href="{% url 'missions' %}" class="link">Missions,&nbsp;valeurs,&nbsp;engagement</a></li>
+                <li class="sub item"><a href="{% url 'territorial-influence' %}" class="link">Rayonnement&nbsp;territorial</a></li>
+                <li class="sub item"><a href="{% url 'blog' %}" class="link">Actualités</a></li>
+                {% comment %} <li class="sub item"><a href="{% url 'association' %}" class="link">L’association</a></li> {% endcomment %}
+                {% comment %} <li class="sub item"><a href="{% url 'team' %}" class="link">L’équipe</a></li> {% endcomment %}
+                {% comment %} <li class="sub item"><a href="{% url 'services' %}" class="link">Nos services</a></li> {% endcomment %}
+                {% comment %} <li class="sub item"><a href="{% url 'values' %}" class="link">Nos valeurs</a></li> {% endcomment %}
+                {% comment %} <li class="sub item"><a href="{% url 'partners' %}" class="link">Nos partenaires</a></li> {% endcomment %}
+
+            </ol>
+        </li>
+        <!-- <li class="link-box">
+            <a class="link" href="{% url 'association' %}">L'association</a>
+        </li> -->
+        <li class="link-box with-sub">
+            {% if "services-ind" in page_class %}
+            <a class="link active" href="{% url 'services_ind' %}">Particuliers</a>
+            {% else %}
+            <a class="link" href="{% url 'services_ind' %}">Particuliers</a>
+            {% endif %}
+
+            <ol class="link-sub">
+                {% for category in menu_categories_ind %}
+                <li class="sub item">
+                    <a href="{% url 'category' category.slug %}" class="link">{{ category }}</a>
+                </li>
+                {% endfor %}
+            </ol>
+        </li>
+        <li class="link-box with-sub">
+            {% if "services-pro" in page_class %}
+            <a class="link active" href="{% url 'services_pro' %}">Professionnels</a>
+            {% else %}
+            <a class="link" href="{% url 'services_pro' %}">Professionnels</a>
+            {% endif %}
+
+            <ol class="link-sub">
+                {% for category in menu_categories_pro %}
+                <li class="sub item">
+                    <a href="{% url 'category' category.slug %}" class="link">{{ category }}</a>
+                </li>
+                {% endfor %}
+            </ol>
+        </li>
+        <!-- <li class="link-box">
+            <a class="link" href="{% url 'association' %}">L'association</a>
+        </li> -->
+        <li class="link-box">
+            {% if "jobhunt" in page_class %}
+            <a class="link active" href="{% url 'jobhunt' %}">Recherche&nbsp;d’emploi</a>
+            {% else %}
+            <a class="link" href="{% url 'jobhunt' %}">Recherche&nbsp;d’emploi</a>
+            {% endif %}
+        </li>
+        <!-- <li class="link-box">
+            <a class="link" href="{% url 'blog' %}">Actualités</a>
+        </li>
+        <li class="link-box">
+            <a class="link" href="{% url 'basket' %}">Panier</a>
+        </li>
+        <li class="link-box">
+            <a class="link" href="{% url 'admin:index' %}">(Administration)</a>
+        </li> -->
+        <li class="link-box with-sub">
+            {% if "garden" in page_class %}
+            <a class="link active" href="{% url 'garden' %}">Le&nbsp;Jardin</a>
+            {% else %}
+            <a class="link" href="{% url 'garden' %}">Le&nbsp;Jardin</a>
+            {% endif %}
+            <ol class="link-sub">
+                <li class="sub item"><a href="{% url 'basket' %}" class="link">Les&nbsp;paniers</a></li>
+                <li class="sub item"><a href="{% url 'garden-project' %}" class="link">Le&nbsp;projet</a></li>
+            </ol>
+        </li>
+        <li class="link-box">
+            {% if "contact" in page_class %}
+            <a class="link active" href="{% url 'contact' %}">Contact</a>
+            {% else %}
+            <a class="link" href="{% url 'contact' %}">Contact</a>
+            {% endif %}
+
+        </li>
+    </ol>
+</nav>

@@ -1,0 +1,85 @@
+{% extends "core.html" %}
+{% load static %}
+
+{% block title %}{{ service.job }}{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ service.job }}</h1>
+
+<dt>
+    <dl>Date de dépôt</dl>
+<dt>
+    {% if service.date %}
+    {{ service.date }}
+    {% else %}
+    Offre permanente
+    {% endif %}
+</dt>
+
+<dl>Type de contrat</dl>
+<dt>{{ service.contrat|linebreaks }}</dt>
+
+
+{% if service.particularity %}
+<dl>Particularité</dl>
+<dt>{{ service.particularity }}</dt>
+{% endif %}
+
+<dl>Descriptif du poste</dl>
+<dt>{{ service.description|linebreaks }}</dt>
+
+<dl>Durée de travail</dl>
+<dt>{{ service.duration }}</dt>
+
+<dl>Amplitude horaires</dl>
+<dt>{{ service.amplitude }}</dt>
+
+<dl>Lieu de travail</dl>
+<dt>{{ service.location }}</dt>
+
+{% if service.experience %}
+<dl>Expérience requise</dl>
+<dt>{{ service.experience }}</dt>
+{% endif %}
+
+{% if service.qualification %}
+<dl>Formation/Qualification</dl>
+<dt>{{ service.qualification }}</dt>
+{% endif %}
+
+{% if service.skills %}
+<dl>Capacités liées à l’emploi</dl>
+<dt>{{ service.skills }}</dt>
+{% endif %}
+
+{% if service.knowing %}
+<dl>Savoir et savoir être</dl>
+<dt>{{ service.knowing }}</dt>
+{% endif %}
+
+{% if service.remuneration %}
+<dl>Rémunération</dl>
+<dt>{{ service.remuneration }}</dt>
+{% endif %}
+
+{% if service.methods %}
+<dl>Modalité d’orientation et de sélection</dl>
+<dt>{{ service.methods }}</dt>
+{% endif %}
+</dt>
+
+
+{% for s in services_list %}
+<p>{{ s }}</p>
+{% endfor %}
+
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Envoyer" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{# Template 404 #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body class="404">
+    <header id="header" class="primary page-header">
+        {% include 'header.html' %}
+        {% include 'navigation.html' %}
+    </header>
+
+    <main id="main" class="primary page-main main-content" role="main">
+        {% block content %}
+        404
+        {% endblock%}
+    </main>
+
+    <footer id="footer" class="primary page-footer grid" style="--grid-template:'logo logo logo logo' auto 'menu menu legal social' auto 'copyright copyright copyright copyright' auto / 1fr 1fr 1fr 1fr">
+        {% include 'footer.html' %}
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

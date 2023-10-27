@@ -1,0 +1,118 @@
+{% extends "core.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if nl_subscription %}
+<div class="alert alert-success">
+    Votre abonnement est confirmé. Merci pour votre intérêt !
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+{% if page.presentation %}
+<article id="presentation" class="article with-background center" style="--b-img:url({% static 'img/background/Honey_bees.jpg' %})">
+    <h1 class="title grid-label h2" style="--grid-label:title">Une association intermédiaire expérimentée</h1>
+    <p>{{ page.presentation|safe }}</p>
+    <a class="read btn btn-lblue" href="{% url 'association' %}">En savoir plus</a>
+</article>
+{% endif %}
+
+{% if page.services_presentation %}
+<article id="services" class="article grid" style="--grid-template:'title title' auto 'deco deco' auto 'particulier pro' auto / 1fr 1fr;--grid-gap:1em">
+    <h2 class="title grid-label h2" style="--grid-label:title">
+        {{ page.services_presentation|safe }}
+    </h2>
+
+    <div class="decoration grid-label" style="--grid-label:deco">
+        <picture>
+            <source srcset="{% static 'img/deco/services_mini.png' %}" media="(max-width: 1250px)">
+            <img src="{% static 'img/deco/services.png' %}" alt="Decoration des services">
+        </picture>
+    </div>
+
+    <div class="box grid-label" style="--grid-label:particulier">
+        <h3 class="title h3"><b>Services</b> aux <b>particuliers</b></h3>
+        {% for services in services_particuliers %}
+        <div class="service">
+            <h4 class="h4"><a href="{% url 'category' services.0.category.slug %}">{{ services.0.category }}</a></h4>
+            <ul class="list">
+                {% for service in services %}
+                {% if service.available %}
+                <li id="sa-{{ service.slug }}">
+                    {{ service.name }}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        <a class="read btn btn-lblue" href="{% url 'services_ind' %}">En savoir plus</a>
+    </div>
+
+    <div class="box grid-label" style="--grid-label:pro">
+        <h3 class="title h3"><b>Services</b> aux <b>professionnels</b></h3>
+        {% for services in services_professionnels %}
+        <div class="service">
+            <h4 class="h4"><a href="{% url 'category' services.0.category.slug %}">{{ services.0.category }}</a></h4>
+            <ul class="list">
+                {% for service in services %}
+                {% if service.available %}
+                <li id="sr-{{ service.slug }}">
+                    {{ service.name }}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        <a class="read btn btn-lblue" href="{% url 'services_pro' %}">En savoir plus</a>
+    </div>
+</article>
+{% endif %}
+
+{% if page.garden_presentation %}
+<article class="article with-background grid" id="jardin" style="--b-img:url({% static 'img/background/Potager.jpg' %});--grid-template:'title title' auto 'img content' auto / 3fr 4fr;--grid-gap:1em">
+    <h2 class="title center grid-label h2" style="--grid-label:title">
+        Le jardin Abeilles Maraîchères<br>
+        <img src="{% static 'img/LogoAbeillesJardin.svg' %}" alt="Logo du jardin" class="logo">
+    </h2>
+    <img class="decoration grid-label" src="{{ page.garden_image.url }}" alt="Decoration de la presentation du jardin" style="--grid-label:img">
+    <div class="content grid-label left" style="--grid-label:content">
+        <p>{{ page.garden_presentation|safe }}</p>
+        <a class="read btn btn-lblue" href="{% url 'basket' %}">En savoir plus et s’abonner aux paniers</a>
+    </div>
+</article>
+{% endif %}
+
+<article id="posts" class="article">
+    <h2 class="h2">Actualités</h2>
+    <div class="posts box grid" style="--grid-gap:3em; --grid-template:1fr / 1fr 1fr 1fr">
+        {% for post in posts %}
+        <div class="post box center" id="post-{{ post.slug }}">
+            {% if post.image %}
+            <img class="thumbnail" src="{{ post.image.url }}" alt="illustration du post" />
+            {% endif %}
+            <h3 class="title h3">{{ post.title }}</h3>
+            <p class="content">{{ post.extract }}</p>
+            <a class="read btn btn-lblue" href="{% url 'single-post' post.slug %}">En savoir plus</a>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+
+<article class="article grid" id="avantages" style="--grid-template:'title title title title' auto 'nil nil nil nil' auto / 1fr 1fr 1fr 1fr;--grid-gap:1em">
+    <h2 class=" grid-label h2" style="--grid-label:title">Les avantages d’Abeilles Aide et Entraide</h2>
+
+    {% for benefit in benefits %}
+    <div class="avantage box center">
+        <p><strong>{{ benefit.title }}</strong></p>
+        <span>{{ benefit_title }}</span>
+        <p>{{ benefit.text|safe }}</p>
+    </div>
+    {% endfor %}
+
+</article>
+{% endblock %}

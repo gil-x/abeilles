@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Creato Display';
+    src: url('/static/font/creatodisplay-regular.woff2') format('woff2'),
+        url('/static/font/creatodisplay-regular.woff') format('woff'),
+        url('/static/font/creatodisplay-regular.svg#creato_displayregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Creato Display';
+    src: url('/static/font/creatodisplay-bold.woff2') format('woff2'),
+        url('/static/font/creatodisplay-bold.woff') format('woff'),
+        url('/static/font/creatodisplay-bold.svg#creato_displaybold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}

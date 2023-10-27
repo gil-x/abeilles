@@ -1,0 +1,20 @@
+# python
+venv
+*.pyc
+__pycache__
+
+# app
+db.sqlite3
+abeilles/settings_specific.py
+abeilles/settings_specific_pp.py
+abeilles/settings_specific_prod.py
+media/*
+!media/default.webp
+!media/default_square.webp
+
+# server
+passenger_wsgi.py
+tmp
+
+# other
+_w

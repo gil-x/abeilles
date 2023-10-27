@@ -1,0 +1,49 @@
+{% extends "core.html" %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<h1>Bonjour {{ user.username }} !</h1>
+
+{% else %}
+
+<h1>Connexion</h1>
+
+<form method="post" action=".">
+    {% csrf_token %}
+
+    <p>
+        <label for={{ form.username.id_for_label }}>Nom d'utilisateur / Email :</label>
+        {{ form.username }}
+    </p>
+    <p>
+        <label for={{ form.password.id_for_label }}>Mot de passe :</label>
+        {{ form.password }}
+    </p>
+    <input type="submit" value="Se connecter" />
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <p class="warning">{{ error|escape }}</p>
+    {% endfor %}
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+    <p class="warning">{{ error|escape }}</p>
+    {% endfor %}
+    {% endif %}
+</form>
+
+{% endif %}
+
+<div>
+    <a href="{% url 'registration' %}">Créer un compte</a> &nbsp;|&nbsp; <a href="{% url 'password_reset' %}">Mot de passe oublié</a>
+</div>
+
+
+{% endblock %}

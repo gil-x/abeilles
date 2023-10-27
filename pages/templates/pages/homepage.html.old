@@ -1,0 +1,106 @@
+{% extends "core.html" %}
+
+{% block content %}
+
+{% comment    %}
+PRESENTATION :
+{% endcomment %}
+
+{% if page.presentation %}
+{{ page.presentation|safe }}
+{% endif %}
+
+{% comment    %}
+SERVICES :
+{% endcomment %}
+
+{% if page.services_presentation %}
+{{ page.services_presentation|safe }}</p>
+{% endif %}
+
+<h2>Services pour les particuliers</h2>
+
+{% for services in ind_services_set %}
+
+<h3>{{ services.0.category }}</h3>
+
+<ul>
+    {% for service in services %}
+    <li>
+        <a href="{% url 'single-service' service.slug %}">{{ service.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endfor %}
+
+<h2>Services pour les professionnels</h2>
+
+{% for services in pro_services_set %}
+
+<h3>{{ services.0.category }}</h3>
+
+<ul>
+    {% for service in services %}
+    <li>
+        <a href="{% url 'single-service' service.slug %}">{{ service.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+{% comment    %}
+JARDIN :
+{% endcomment %}
+
+{% if page.garden_image %}
+<img src={{ page.garden_image.url }} alt="">
+{% endif %}
+
+{% if page.garden_presentation %}
+{{ page.garden_presentation|safe }}
+{% endif %}
+
+{% comment    %}
+ACTUALITÉS :
+{% endcomment %}
+
+<h2>Actualités<h2>
+        {% for post in posts %}
+        <div>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.extract }}</p>
+
+            {% if post.image %}
+            <img class="thumbnail" src="{{ post.image.url }}" alt="" />
+            {% endif %}
+
+            <a href="{% url 'single-post' post.slug %}">lire</a>
+        </div>
+        <hr>
+        {% endfor %}
+
+        {% comment    %}
+        AVANTAGES :
+        {% endcomment %}
+
+        <h2>Les avantages d’Abeilles Aide et Entraide<h2>
+
+                {% if page.benefit1 %}
+                <p>{{ page.benefit1|safe }}</p>
+                {% endif %}
+
+                {% if page.benefit2 %}
+                <p>{{ page.benefit2|safe }}</p>
+                {% endif %}
+
+                {% if page.benefit3 %}
+                <p>{{ page.benefit3|safe }}</p>
+                {% endif %}
+
+                {% if page.benefit4 %}
+                <p>{{ page.benefit4|safe }}</p>
+                {% endif %}
+
+
+                {% endblock %}

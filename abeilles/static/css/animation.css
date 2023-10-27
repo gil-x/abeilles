@@ -1,0 +1,19 @@
+@keyframes FlyBeeRight {
+    from {
+        transform: rotate(-3deg)
+    }
+
+    to {
+        transform: rotate(8deg)
+    }
+}
+
+@keyframes FlyBeeLeft {
+    from {
+        transform: rotate(3deg)
+    }
+
+    to {
+        transform: rotate(-8deg)
+    }
+}

@@ -1,0 +1,10 @@
+{% load honeypot %}
+
+<form class="form newsletter-form" method='POST'>
+    {% csrf_token %}
+    <p class="info valid center demand-confirmation">Votre demande a bien été enregistrée, vous allez recevoir un mail pour confirmer votre abonnement.</p>
+    <p class="info warning center check-something">Vous devez cochez au moins une des cases !</p>
+    <p class="info warning center error">Une erreur s'est produite, réessayer plus tard, sinon contactez-nous.</p>
+    {{ newsletter_form.as_p }}
+    <input class="btn btn-lblue" type="submit" value="Envoyer" />
+</form>

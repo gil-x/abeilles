@@ -1,0 +1,93 @@
+{% extends "core.html" %}
+{% load static %}
+
+{% block title %}Nos services{% endblock %}
+
+{% block content %}
+
+<h1>Nos services ?</h1>
+<h1>{{ title }}</h1>
+
+{% if headline %}
+<h2>{{ headline }}</h2>
+{% endif %}
+
+{% if featured_image %}
+<img src={{ featured_image.url }} alt="">
+{% endif %}
+
+{% if body1 %}
+<p>{{ body1|safe }}</p>
+{% endif %}
+
+{% if image1 %}
+<img src={{ image1.url }} alt="">
+{% endif %}
+
+{% if body2 %}
+<p>{{ body2|safe }}</p>
+{% endif %}
+
+{% if image2 %}
+<img src={{ image2.url }} alt="">
+{% endif %}
+
+{% if body3 %}
+<p>{{ body3|safe }}</p>
+{% endif %}
+
+{% if image3 %}
+<img src={{ image3.url }} alt="">
+{% endif %}
+
+
+
+
+<h2>Services pour les professionnels</h2>
+
+
+{% for services in services_professionnels %}
+
+<h3>{{ services.0.category }}</h3>
+
+{% for service in services %}
+
+<div>
+    <h4>{{ service.name }}</h4>
+    <dt>
+        <dl>Descriptif du poste</dl>
+    <dt>{{ service.description|linebreaks }}</dt>
+    </dt>
+    <a href="{% url 'single-service' service.slug %}">voir le service</a>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+
+
+
+<h2>Services pour les particuliers</h2>
+
+{% for services in services_particuliers %}
+
+<h3>{{ services.0.category }}</h3>
+
+{% for service in services %}
+
+<div>
+    <h4>service.name {{ service.name }}</h5>
+        <p>category: {{ service.category }}</p>
+        <dt>
+            <dl>Descriptif du poste</dl>
+        <dt>{{ service.description|linebreaks }}</dt>
+        </dt>
+        <a href="{% url 'single-service' service.slug %}">voir le service</a>
+</div>
+
+{% endfor %}
+
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,237 @@
+:root {
+    --c-blue: #0c5a7a;
+    --c-lblue: #4fa0b8;
+    --c-green: #acd14b;
+    --c-dgreen: #7ba940;
+    --c-vdgreen: #40952c;
+    --c-lgreen: #e6f0cc;
+    --c-beige: #ffefd6;
+    --c-white: #FFFFFF;
+    --c-dwhite: #f7f6fe;
+    --c-ldark: #686868;
+    --c-dark: #1e1e1e;
+    --c-black: #000000;
+    --c-rouge: #bf2117;
+    --c-grey: #dadada;
+
+    --ph-padding: 2em;
+    --pw-padding: 8vw;
+    --pws-padding: 10vw;
+
+    --r-box: 3px;
+    --r-button: 5em;
+
+    --t-fast: .05s;
+    --t-dmedium: .15s;
+    --t-medium: .3s;
+    --t-slow: .6s;
+
+    --f-regular: 1.10rem;
+    --f-smaller: 0.85em;
+    --f-small: 1.15em;
+    --f-medium: 1.3em;
+    --f-large: 1.5em;
+    --f-xlarge: 2em;
+
+    --f-family: "Creato Display", arial, x-locale-body, sans-serif;
+
+    --c-primary: var(--c-dark);
+    --c-secondary: var(--c-white);
+
+    --img-plus: url("/static/img/picto/plus.svg");
+    --img-jardin: url("/static/img/picto/picto_jardin.png");
+    --img-panier: url("/static/img/picto/picto_panier.png");
+
+    --screen-sm: 768px;
+    --screen-md: 992px;
+    --screen-lg: 1250px;
+}
+
+@media screen and (max-width: 1250px) {
+    :root {
+        --pw-padding: 2.5em;
+        --pws-padding: 1.5vw;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    :root {
+        --pw-padding: 1em;
+        --pws-padding: .5em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --f-regular: 1.05rem;
+        --f-smaller: 0.85em;
+        --f-small: 1.1em;
+        --f-medium: 1.15em;
+        --f-large: 1.25em;
+        --f-xlarge: 1.8em;
+    }
+
+    #smart-nav-content {
+        --c-primary: var(--c-dark);
+        --c-secondary: var(--c-white);
+    }
+
+    #smart-nav-content summary,
+    #smart-nav-content .smart-nav-item.link {
+        --c-primary: var(--c-dark);
+        --c-secondary: var(--c-white);
+    }
+
+    #smart-nav-content summary.active,
+    #smart-nav-content summary:hover,
+    #smart-nav-content summary:focus,
+    #smart-nav-content .smart-nav-item.link.active,
+    #smart-nav-content .smart-nav-item.link:hover,
+    #smart-nav-content .smart-nav-item.link:focus {
+        --c-primary: var(--c-lblue);
+    }
+
+    /* #smart-nav-content .smart-nav-item {
+        --c-primary: var(--c-white);
+        --c-secondary: var(--c-ldark);
+    }
+
+    #smart-nav-content .active,
+    #smart-nav-content .link:hover,
+    #smart-nav-content .link:focus {
+        --c-secondary: var(--c-lblue);
+    } */
+}
+
+p>a,
+.link.blue,
+.link.home {
+    --c-primary: var(--c-blue);
+}
+
+.link.lblue {
+    --c-primary: var(--c-lblue);
+}
+
+.info.valid {
+    --c-primary: var(--c-dgreen);
+}
+
+.info.warning {
+    --c-primary: var(--c-rouge);
+}
+
+.form {
+    --c-secondary: var(--c-white);
+}
+
+.form input,
+.form textarea {
+    --c-primary: var(--c-dark);
+    --c-secondary: var(--c-grey);
+}
+
+.h1,
+.title.h1 {
+    --c-primary: var(--c-lblue);
+}
+
+h2,
+.h2,
+.title.h2 {
+    --c-primary: var(--c-blue);
+}
+
+h3,
+.h3,
+.title.h3 {
+    --c-primary: var(--c-lblue);
+}
+
+#page-nav.nav-bar .link-box .link:hover,
+#page-nav.nav-bar .link-box:hover>.link,
+#page-nav.nav-bar .link-box>.link.active {
+    --c-primary: var(--c-lblue);
+}
+
+#zone {
+    --c-secondary: var(--c-white) !important;
+}
+
+.btn-blue,
+#secondary_menu,
+#smart-nav-secondary {
+    --c-primary: var(--c-white) !important;
+    --c-secondary: var(--c-blue) !important;
+}
+
+.link.vdgreen {
+    --c-secondary: var(--c-vdgreen) !important;
+}
+
+.btn-lblue {
+    --c-primary: var(--c-white) !important;
+    --c-secondary: var(--c-lblue) !important;
+}
+
+.featured,
+#social .link {
+    --c-primary: var(--c-white);
+    --c-secondary: var(--c-lblue);
+}
+
+#header.page-header {
+    --c-primary: var(--c-blue);
+}
+
+#page-nav.nav-bar {
+    --c-primary: var(--c-dark);
+}
+
+body.home #avantages.article,
+body.home #presentation.article,
+#page-nav.nav-bar .link-sub,
+body:not(.home) .article:nth-child(even) {
+    --c-secondary: var(--c-beige);
+}
+
+body.garden .article:nth-child(even),
+body.basket .article:nth-child(even),
+body.garden-project .article:nth-child(even) {
+    --c-secondary: var(--c-lgreen);
+}
+
+#temoignages .name {
+    --c-primary: var(--c-blue);
+}
+
+#temoignages .photo {
+    --c-primary: var(--c-green);
+}
+
+body.garden #temoignages .photo {
+    --c-primary: var(--c-lblue);
+}
+
+#blog-list {
+    --c-primary: var(--c-ldark);
+}
+
+#jardin.article,
+#jardinbtn .desc {
+    --c-secondary: var(--c-lgreen);
+}
+
+#basket-free .indicator {
+    --c-secondary: var(--c-green);
+}
+
+#basket-free .indicator>.cursor,
+#basket-free .number>.delta {
+    --c-secondary: var(--c-vdgreen);
+}
+
+#footer.page-footer {
+    --c-primary: var(--c-white);
+    --c-secondary: var(--c-lblue);
+}

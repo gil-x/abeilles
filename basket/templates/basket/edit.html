@@ -1,0 +1,18 @@
+{% extends "core.html" %}
+{% load static %}
+
+{% block title %}Ajuster les paniers{% endblock %}
+
+{% block content %}
+
+<h1>Ajuster les paniers</h1>
+
+
+<form action="{% url 'edit' %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="modifier" />
+</form>
+
+{% endblock %}

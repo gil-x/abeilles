@@ -1,0 +1,14 @@
+{% extends "core.html" %}
+
+{% block title %}Lien d'activation invalide{% endblock %}
+
+{% block content %}
+
+<h1>Petit problème...</h1>
+
+<p class="important">Désolé, il semble que ce lien d'activation ne soit plus valable.<br>
+    Vous pouvez reprendre la procédure en suivant <a href="{% url 'registration' %}">ce lien</a>.</p>
+
+<p>Désolé pour le contre-temps !</p>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="header-prez center">
+    <div class="prez-title">
+        <a href="/">
+            <img class="logo" src="{% static 'img/LogoAbeilles.svg' %}" alt="Logo abeilles">
+        </a>
+        <span hidden>{% firstof meta_title page.title 'Abeilles Aide et Entraide' %}</span>
+    </div>
+    <div class="prez-desc">
+        <h2 class="h2 center">Une <b>ruche</b> de&nbsp;<b>compétences</b></h2>
+        <p class="sub" hidden>Des services pour les professionnels et les particuliers</p>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="prez-link">
+        <a href="/admin/" title="Administration" class="link"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+        <a href="/admin/logout/" title="Se déconnecter" class="link"><i class="fa fa-sign-out-alt" aria-hidden="true"></i></a>
+    </div>
+    {% endif %}
+</div>

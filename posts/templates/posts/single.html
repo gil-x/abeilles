@@ -1,0 +1,35 @@
+{% extends "core.html" %}
+{% load static %}
+{% block title %}{{ service.job }}{% endblock %}
+{% block content %}
+<article id="blog-article" class="article">
+    <h1 class="title h1" id="blog-article-title">{{ post.title }}</h1>
+
+    {% if post.image %}
+    <img id="blog-article-thumbnail" class="post-image" src="{{ post.image.url }}" alt="" />
+    {% endif %}
+
+    <div id="blog-article-content">
+
+        <p>{{ post.extract }}</p>
+        
+        <p>{{ post.body|safe }}</p>
+
+        <div class="download">
+            {% if post.file1 %}
+            <ul>
+                <h2 class="h2 download-item left">À télécharger :</h2>
+                <li>
+                    <a href="{{ post.file1.url }}">{{ post.file1_name }}</a>
+                </li>
+                {% if post.file2 %}
+                <li>
+                    <a href="{{ post.file2.url }}">{{ post.file2_name }}</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</article>
+{% endblock %}
